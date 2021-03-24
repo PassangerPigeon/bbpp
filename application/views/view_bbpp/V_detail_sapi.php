@@ -1,0 +1,143 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+$this->load->view('dist/_partials/header');
+?>
+<!-- Main Content -->
+<div class="main-content">
+  <section class="section">
+
+    <div class="section-header">
+      <h1>Detail Sapi</h1>
+      <br>
+
+
+    </div>
+
+    <div class="section-body">
+
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="card">
+
+            <div class="row">
+              <div class="card-header col-9">
+                <a href="<?php echo base_url() ?>c_sapi" class="btn btn-primary"><i class="fa fa-caret_left"></i> Kembali</a>
+              </div>
+              <?php foreach ($tampil as $key) : ?>
+                <div class="card-header col-3">
+                  <a href="<?php echo base_url() ?>c_sapi/formEditSapi/<?php echo $key['idSapi'] ?>" class="btn btn-success float-right"><i class="fa fa-edit"></i> Edit</a>
+                  <a href="<?php echo base_url() ?>c_sapi" class="btn btn-warning float-right"><i class="fa fa-edit"></i> Jual</a>
+                  <a href="<?php echo base_url() ?>C_sapi/hapusSapi/<?php echo $key['idSapi'] ?>" class="btn btn-danger">Hapus</a>
+                </div>
+            </div>
+            <div class="">
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-6 col-md-6 col-lg-6">
+
+                  <img src="<?php echo base_url() ?>upload/<?php echo $key['fotoSapi'] ?>" height="350" width="350" class="card-img-top">
+                </div>
+
+                <div class="col-6 col-md-6 col-lg-6">
+                  <table class="table">
+
+                    <tr>
+                      <td>Nama Sapi</td>
+                      <td>:</td>
+                      <td><?php echo $key['namaSapi'] ?></td>
+                    </tr>
+
+                    <tr>
+                      <td>Tanggal Lahir</td>
+                      <td>:</td>
+                      <td><?php echo $key['tglLahir'] ?></td>
+                    </tr>
+
+                    <tr>
+                      <td>Usia</td>
+                      <td>:</td>
+                      <td><?php echo $key['usia'] ?> tahun</td>
+                    </tr>
+
+                    <?php foreach ($tampil as $sex) ?>
+                    <?php if ($sex['sex'] == "Betina") : ?>
+
+                      <tr>
+                        <td>Status Laktasi</td>
+                        <td>:</td>
+                        <td><?php echo $key['statLact'] ?> </td>
+                      </tr>
+
+                      <tr>
+                        <td>Jumlah Laktasi</td>
+                        <td>:</td>
+                        <td><?php echo $key['jumlahLaktasi'] ?> </td>
+                      </tr>
+
+                      <?php foreach ($statBunting as $positif) : ?>
+                        <?php if ($positif != null) : ?>
+                          <tr>
+                            <td>Status Bunting</td>
+                            <td>:</td>
+                            <td><?php echo $positif['statInseminasi'] ?></td>
+                          </tr>
+                        <?php else : ?>
+                          -
+                        <?php endif; ?>
+                      <?php endforeach ?>
+
+                      <?php foreach ($tglBeranak as $lahir) : ?>
+                        <?php if ($lahir != null) : ?>
+                          <tr>
+                            <td>Tanggal Beranak terakhir</td>
+                            <td>:</td>
+                            <td><?php echo $lahir['tglBeranak'] ?></td>
+                          </tr>
+                        <?php else : ?>
+                          -
+                        <?php endif; ?>
+                      <?php endforeach ?>
+
+                      <?php foreach ($IBAwal as $awal) : ?>
+                        <tr>
+                          <td>IB Pertama</td>
+                          <td>:</td>
+                          <td><?php echo $awal['tglInseminasi'] ?></td>
+                        </tr>
+                      <?php endforeach ?>
+
+
+                      <?php foreach ($IBAkhir as $akhir) : ?>
+                        <tr>
+                          <td>IB Terakhir</td>
+                          <td>:</td>
+                          <td><?php echo $akhir['tglInseminasi'] ?></td>
+                        </tr>
+                      <?php endforeach ?>
+
+
+                      <tr>
+                        <td>Total IB</td>
+                        <td>:</td>
+                        <td><?php echo $jumlahIB ?></td>
+                      </tr>
+
+                    <?php else : ?>
+                      -
+                    <?php endif; ?>
+                  <?php endforeach ?>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<?php $this->load->view('dist/_partials/footer'); ?>
