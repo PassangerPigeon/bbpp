@@ -60,7 +60,7 @@ class C_hasilperah extends CI_Controller
 	public function formEditPerah($id)
 	{
 
-		$edit = $this->m_hasilperah->daftarHasilPerahModel($id);
+		$edit = $this->m_hasilperah->formEditHasilPerahModel($id);
 		$data = array(
 			'tampil' => $edit
 		);

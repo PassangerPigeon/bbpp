@@ -17,6 +17,19 @@ class M_inseminasi extends CI_Model
 		return $check->result_array();
 	}
 
+	public function formEditInseminasiModel($id = null)
+	{
+
+
+		$this->db->select("tb_inseminasi.*, tb_sapi.*, tb_inseminasi.tglBeranak AS tglBeranakInseminasi");
+		$this->db->join('tb_sapi', 'tb_sapi.idSapi = tb_inseminasi.idSapi');
+		if ($id != null) {
+			$this->db->where('tb_inseminasi.idInseminasi', $id);
+		}
+		$check = $this->db->get('tb_inseminasi');
+		return $check->result_array();
+	}
+
 	public function tambahInseminasiModel($data)
 	{
 		$insert = $this->db->insert('tb_inseminasi', $data);

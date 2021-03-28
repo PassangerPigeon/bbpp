@@ -15,6 +15,19 @@ class M_hasilperah extends CI_Model
 		return $check->result_array();
 	}
 
+	public function formEditHasilPerahModel($id = null)
+	{
+		$this->db->select("tb_sapi.*,tb_hasilperah.*");
+		$this->db->join('tb_sapi', 'tb_sapi.idSapi = tb_hasilperah.idSapi');
+		if ($id != null) {
+			$this->db->where('tb_hasilperah.idPerah', $id);
+		}
+		$check = $this->db->get('tb_hasilperah');
+		return $check->result_array();
+	}
+
+
+
 
 	public function jumlahPerah()
 	{

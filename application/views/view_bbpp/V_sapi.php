@@ -6,7 +6,7 @@ $this->load->view('dist/_partials/header');
 <div class="main-content">
   <section class="section">
 
-  <?php echo $this->session->flashdata('success'); ?>
+    <?php echo $this->session->flashdata('success'); ?>
 
     <div class="section-header">
       <h1>Daftar Sapi</h1>

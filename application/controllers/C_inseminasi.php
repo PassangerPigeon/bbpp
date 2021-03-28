@@ -59,7 +59,7 @@ class C_inseminasi extends CI_Controller
 
 	public function formEditInseminasi($id)
 	{
-		$edit = $this->m_inseminasi->daftarInseminasiModel($id);
+		$edit = $this->m_inseminasi->formEditInseminasiModel($id);
 		$data = array(
 			'tampil' => $edit
 		);
