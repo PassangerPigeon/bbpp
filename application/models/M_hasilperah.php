@@ -4,20 +4,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_hasilperah extends CI_Model
 {
 
-	public function daftarhasilPerahModel($id = null)
+	public function daftarHasilPerahModel($id = null)
 	{
 		$this->db->select("tb_sapi.*,tb_hasilperah.*");
 		$this->db->join('tb_sapi', 'tb_sapi.idSapi = tb_hasilperah.idSapi');
 		if ($id != null) {
-			$this->db->where('idPerah', $id);
+			$this->db->where('tb_hasilperah.idSapi', $id);
 		}
 		$check = $this->db->get('tb_hasilperah');
-		if ($check) {
-			return $check->result_array();
-		} else {
-			return false;
-		}
+		return $check->result_array();
 	}
+
 
 	public function jumlahPerah()
 	{
@@ -26,8 +23,7 @@ class M_hasilperah extends CI_Model
 		if ($cek->num_rows() > 0) {
 			return $cek->row()->jumlahPerah;
 		}
-		return false;	
-		
+		return false;
 	}
 
 
@@ -42,11 +38,11 @@ class M_hasilperah extends CI_Model
 	}
 
 	public function editPerahModel($id, $newData)
-	{   
-		
+	{
+
 		$this->db->where('idPerah', $id);
 		$update = $this->db->update('tb_hasilperah', $newData);
-		
+
 		if ($this->db->affected_rows() > 0) {
 			return $update;
 		} else {
