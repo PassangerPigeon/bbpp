@@ -42,7 +42,6 @@ class M_hasilperah extends CI_Model
 
 		$this->db->where('idPerah', $id);
 		$update = $this->db->update('tb_hasilperah', $newData);
-
 		if ($this->db->affected_rows() > 0) {
 			return $update;
 		} else {

@@ -7,18 +7,14 @@ class M_inseminasi extends CI_Model
 	public function daftarInseminasiModel($id = null)
 	{
 
-		if ($id != null) {
-			$this->db->select('tb_inseminasi.*, tb_sapi.*, tb_inseminasi.tglBeranak AS tglBeranakInseminasi');
-			$this->db->join('tb_sapi', 'tb_sapi.idSapi = tb_inseminasi.idSapi');
-			$this->db->where('tb_sapi.idSapi', $id);	
-		}
 
-		$check = $this->db->get('tb_inseminasi');
-		if ($check) {
-			return $check->result_array();
-		} else {
-			return false;
+		$this->db->select("tb_inseminasi.*, tb_sapi.*, tb_inseminasi.tglBeranak AS tglBeranakInseminasi");
+		$this->db->join('tb_sapi', 'tb_sapi.idSapi = tb_inseminasi.idSapi');
+		if ($id != null) {
+			$this->db->where('tb_inseminasi.idSapi', $id);
 		}
+		$check = $this->db->get('tb_inseminasi');
+		return $check->result_array();
 	}
 
 	public function tambahInseminasiModel($data)
@@ -33,6 +29,7 @@ class M_inseminasi extends CI_Model
 
 	public function editInseminasiModel($id, $newData)
 	{
+
 		$this->db->where('idInseminasi', $id);
 		$update = $this->db->update('tb_inseminasi', $newData);
 		if ($this->db->affected_rows() > 0) {
@@ -41,6 +38,7 @@ class M_inseminasi extends CI_Model
 			return false;
 		}
 	}
+
 	public function hapusInseminasiModel($id)
 	{
 		$this->db->where('idInseminasi', $id);

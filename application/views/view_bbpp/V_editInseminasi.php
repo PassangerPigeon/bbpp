@@ -16,14 +16,12 @@ $this->load->view('dist/_partials/header');
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-12">
                     <div class="card">
-                    
+
 
                         <div class="card-header">
                             <?php foreach ($tampil as $key) : ?>
                                 <a href="<?php echo base_url() ?>C_inseminasi/lihatInseminasi/<?php echo $key['idSapi'] ?>" class="btn btn-primary"><i class="fa fa-caret-left"></i> Kembali</a>
                         </div>
-
-                        
 
                         <div class="card-body">
 

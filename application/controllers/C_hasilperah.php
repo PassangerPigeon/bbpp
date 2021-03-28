@@ -17,7 +17,7 @@ class C_hasilperah extends CI_Controller
 			[
 				'idSapi' => $id,
 				'tampil' => $this->m_hasilperah->daftarHasilPerahModel($id)
-				
+
 			];
 		$this->load->view('view_bbpp/v_hasilperah', $data);
 	}
@@ -39,7 +39,7 @@ class C_hasilperah extends CI_Controller
 		$hasilPerahPagi = $this->input->post('hasilPerahPagi');
 		$hasilPerahSore = $this->input->post('hasilPerahSore');
 		$jumlahPerah = $hasilPerahPagi + $hasilPerahSore;
-		
+
 
 		$data =
 			[
@@ -59,6 +59,7 @@ class C_hasilperah extends CI_Controller
 
 	public function formEditPerah($id)
 	{
+
 		$edit = $this->m_hasilperah->daftarHasilPerahModel($id);
 		$data = array(
 			'tampil' => $edit
@@ -68,7 +69,7 @@ class C_hasilperah extends CI_Controller
 
 	public function editHasilPerah($id)
 	{
-		
+
 		$idSapi = $this->input->post('idSapi');
 		$tglPerah = $this->input->post('tglPerah');
 		$hasilPerahPagi = $this->input->post('hasilPerahPagi');
@@ -82,7 +83,7 @@ class C_hasilperah extends CI_Controller
 			];
 		$update = $this->m_hasilperah->editPerahModel($id, $data);
 		if ($update) {
-			redirect('C_hasilperah/tampilHasilPerah/'.$idSapi, 'refresh');
+			redirect('C_hasilperah/tampilHasilPerah/' . $idSapi, 'refresh');
 		} else {
 			echo 'gagal';
 		}
@@ -94,7 +95,7 @@ class C_hasilperah extends CI_Controller
 
 		$delete = $this->m_hasilperah->hapusPerahModel($id);
 		if ($delete) {
-			redirect('C_hasilperah/tampilHasilPerah/'.$idSapi, 'refresh');
+			redirect('C_hasilperah/tampilHasilPerah/' . $idSapi, 'refresh');
 		} else {
 			echo 'gagal';
 		}
