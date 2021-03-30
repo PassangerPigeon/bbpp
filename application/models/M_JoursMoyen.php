@@ -4,26 +4,36 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_joursmoyen extends CI_Model
 {
 
-	public function daftarSapiModel($id = null)
+	public function daftarJMRModel($id = null)
 	{
-
 		if ($id != null) {
-
 			$this->db->where('idSapi', $id);
 		}
 		$check = $this->db->get('tb_sapi');
-
 		return $check->result_array();
 	}
-	public function voluntaryPeriod($id)
+
+	public function indexModel()
 	{
-		$query = $this->db->query("SELECT jumlahLaktasi FROM tb_sapi WHERE idSapi = '$id'");
-		$cek = $query->result_array();
-		if ($cek) {
-			return $cek;
-		} else {
-			return false;
-		}
+		$this->db->select('tb_sapi.*');
+		$this->db->where('sex', 'Betina');
+		$cek = $this->db->get('tb_sapi');		
+		return $cek->result_array();
+	}
+
+	public function tglBeranakTerakhir($id) //bug gaming
+	{
+		$this->db->select('tb_inseminasi.tglBeranak, tb_sapi.idSapi');
+		$this->db->join('tb_sapi', 'tb_sapi.idSapi = tb_inseminasi.idSapi');
+		$this->db->where('tb_sapi.idSapi', $id);
+		$check = $this->db->get('tb_inseminasi', 1);
+		return $check->result_array();
+		
+		
+		
+		// $query = $this->db->query("SELECT tglBeranak FROM tb_inseminasi  WHERE idSapi = '$id' ORDER BY tglBeranak 
+		// DESC LIMIT 1" );
+		// return $query->result_array();
 	}
 }
 

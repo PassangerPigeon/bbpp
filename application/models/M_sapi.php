@@ -7,13 +7,10 @@ class M_sapi extends CI_Model
 
 	public function daftarSapiModel($id = null)
 	{
-
 		if ($id != null) {
-
 			$this->db->where('idSapi', $id);
 		}
 		$check = $this->db->get('tb_sapi');
-
 		return $check->result_array();
 	}
 
@@ -72,7 +69,6 @@ class M_sapi extends CI_Model
 		$query = $this->db->query("SELECT tglBeranak FROM tb_inseminasi WHERE idSapi = '$id'
 		ORDER BY tglBeranak DESC LIMIT 1");
 		$cek = $query->result_array();
-
 		if ($cek) {
 			return $cek;
 		} else {
@@ -101,6 +97,17 @@ class M_sapi extends CI_Model
 		return $cek;
 	}
 
+	public function voluntaryPeriodModel($id)
+	{
+		$this->db->where('idSapi', $id);
+		$query = $this->db->query("SELECT jumlahLaktasi FROM tb_sapi WHERE idSapi = '$id'");
+		$cek = $query->result_array();
+		if ($cek) {
+			return $cek;
+		} else {
+			return false;
+		}
+	}
 
 	public function tambahSapiModel($data)
 	{

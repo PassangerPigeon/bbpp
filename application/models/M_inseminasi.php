@@ -6,8 +6,6 @@ class M_inseminasi extends CI_Model
 
 	public function daftarInseminasiModel($id = null)
 	{
-
-
 		$this->db->select("tb_inseminasi.*, tb_sapi.*, tb_inseminasi.tglBeranak AS tglBeranakInseminasi");
 		$this->db->join('tb_sapi', 'tb_sapi.idSapi = tb_inseminasi.idSapi');
 		if ($id != null) {
@@ -62,6 +60,7 @@ class M_inseminasi extends CI_Model
 			return false;
 		}
 	}
+
 }
 
 /* End of file M_inseminasi.php */

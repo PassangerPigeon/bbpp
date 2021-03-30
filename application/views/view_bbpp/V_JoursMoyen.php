@@ -7,7 +7,7 @@ $this->load->view('dist/_partials/header');
     <section class="section">
 
         <div class="section-header">
-            <h1>Daftar Inseminasi</h1>
+            <h1>Jours Moyen Retard</h1>
             <br>
         </div>
 
@@ -20,6 +20,8 @@ $this->load->view('dist/_partials/header');
                         <div class="card-header">
                             <a href="<?php echo base_url() ?>c_sapi" class="btn btn-primary"><i class="fa fa-caret-left"></i> Kembali</a>
                         </div>
+
+                        <?php print_r($tglBeranak) ?>
 
                         <div class="card-body">
                             <table class="table table-striped table-sm">
@@ -42,7 +44,7 @@ $this->load->view('dist/_partials/header');
                                     </tr>
                                 </thead>
                                 <tbody>
-                                
+
                                     <tr align="center">
                                         <th></th>
                                         <th></th>
@@ -62,25 +64,26 @@ $this->load->view('dist/_partials/header');
                                     </tr>
                                     <?php $no = 1;
                                     foreach ($tampil as $key) : ?>
-                                    <tr>
-                                        <td><?php echo $no++; ?></td>
-                                        <td><?php echo $key['namaSapi'] ?></td>
-                                        <td><?php echo $key['jumlahLaktasi'] ?></td>
-                                        <?php foreach ($vpoint as $vp) : ?>
-                                        <td><?php echo $vp["jumlahLaktasi"] ?></td>
-                                        <?php endforeach ?>
-                                        <td><?php ?></td>
-                                        <td><?php ?></td>
-                                        <td><?php ?></td>
-                                        <td><?php ?></td>
-                                        <td><?php ?></td>
-                                        <td><?php ?></td>
-                                        <td><?php ?></td>
-                                        <td><?php ?></td>
-                                        <td><?php ?></td>
-                                        <td><?php ?></td>
-                                        <td><?php ?></td>
-                                    </tr>
+
+                                        <tr>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><?php echo $key['namaSapi'] ?></td>
+                                            <td><?php echo $key['jumlahLaktasi'] ?></td>
+                                            <td><?php echo ($key['jumlahLaktasi'] == 1 ? '80' : ($key['jumlahLaktasi'] > 1) ? '60' : '-') ?></td>
+                                            <?php foreach ($tglBeranak as $lahir) : ?>
+                                                <td><?php echo $lahir['tglBeranak'] ?></td> <!-- bug gaming -->
+                                            <?php endforeach; ?>
+                                            <td><?php ?></td>
+                                            <td><?php ?></td>
+                                            <td><?php ?></td>
+                                            <td><?php ?></td>
+                                            <td><?php ?></td>
+                                            <td><?php ?></td>
+                                            <td><?php ?></td>
+                                            <td><?php ?></td>
+                                            <td><?php ?></td>
+                                            <td><?php ?></td>
+                                        </tr>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
