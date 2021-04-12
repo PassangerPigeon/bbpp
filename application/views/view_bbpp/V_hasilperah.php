@@ -25,6 +25,8 @@ $this->load->view('dist/_partials/header');
 
             </div>
 
+            <p hidden><?php print_r($this->m_hasilperah->jumlahPerahSapi($idSapi)) ?></p>
+
             <div class="card-body">
               <table class="table table-striped" id="table-3">
 
@@ -47,9 +49,9 @@ $this->load->view('dist/_partials/header');
                         <td><?php echo $no++; ?></td> 
                         <td><?php echo $key['namaSapi'] ?></td> 
                         <td><?php echo $key['tglPerah'] ?></td>
-                        <td><?php echo $key['hasilPerahPagi'] ?></td>
-                        <td><?php echo $key['hasilPerahSore'] ?></td>
-                        <td><?php echo $key['jumlahPerah'] ?></td>
+                        <td><?php echo $key['hasilPerahPagi'] ?> Liter</td>
+                        <td><?php echo $key['hasilPerahSore'] ?> Liter</td>
+                        <td><?php echo ($key['hasilPerahPagi'] + $key['hasilPerahSore']) ?> Liter</td>
                         <td>
                           <a href="<?php echo base_url() ?>c_hasilperah/formEditPerah/<?php echo $key['idPerah'] ?>" class="btn btn-success">Edit</a>
                           <a href="<?php echo base_url() ?>c_hasilperah/hapusHasilPerah/<?php echo $key['idPerah']?>/<?php echo $key['idSapi']?>" class="btn btn-danger">Hapus</a>

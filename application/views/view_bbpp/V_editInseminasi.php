@@ -17,7 +17,6 @@ $this->load->view('dist/_partials/header');
                 <div class="col-12 col-md-12 col-lg-12">
                     <div class="card">
 
-
                         <div class="card-header">
                             <?php foreach ($tampil as $key) : ?>
                                 <a href="<?php echo base_url() ?>C_inseminasi/lihatInseminasi/<?php echo $key['idSapi'] ?>" class="btn btn-primary"><i class="fa fa-caret-left"></i> Kembali</a>
@@ -38,10 +37,16 @@ $this->load->view('dist/_partials/header');
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="tglBeranak">Tanggal Beranak Terakhir</label>
+                                    <input type="date" name="tglBeranak" id="tglBeranak" class="form-control" value="<?php echo $key['tglBeranak'] ?>">
+                                </div>
+
+                                <div class="form-group">
                                     <label for="statInseminasi">Status Inseminasi</label>
                                     <select name="statInseminasi" id="statInseminasi" class="form-control">
-                                        <option value="berhasil" <?php echo $key['statInseminasi'] == "berhasil" ? "selected" : null ?>>Berhasil</option>
-                                        <option value="tidak berhasil" <?php echo $key['statInseminasi'] == "tidak berhasil" ? "selected" : null ?>>Tidak Berhasil</option>
+                                        <option value="Positif" <?php echo $key['statInseminasi'] == "Positif" ? "selected" : null ?>>Positif</option>
+                                        <option value="Negatif" <?php echo $key['statInseminasi'] == "Negatif" ? "selected" : null ?>>Negatif</option>
+                                        <option value="Belum dikonfirmasi" <?php echo $key['statInseminasi'] == "Belum dikonfirmasi" ? "selected" : null ?>>Sudah Inseminasi, Belum Dikonfirmasi</option>
                                     </select>
                                 </div>
 
@@ -55,10 +60,6 @@ $this->load->view('dist/_partials/header');
                                     <input type="date" name="tglPositif" id="tglPositif" class="form-control" value="<?php echo $key['tglPositif'] ?>">
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="tglBeranak">Tanggal Beranak</label>
-                                    <input type="date" name="tglBeranak" id="tglBeranak" class="form-control" value="<?php echo $key['tglLahir'] ?>">
-                                </div>
                                 <button type="reset" class="btn btn-danger btn-sm">Reset</button>
                                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-paper-plane"> Simpan</i></button>
                         </div>

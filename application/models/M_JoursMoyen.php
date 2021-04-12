@@ -17,24 +17,10 @@ class M_joursmoyen extends CI_Model
 	{
 		$this->db->select('tb_sapi.*');
 		$this->db->where('sex', 'Betina');
-		$cek = $this->db->get('tb_sapi');		
+		$cek = $this->db->get('tb_sapi');
 		return $cek->result_array();
 	}
 
-	public function tglBeranakTerakhir($id) //bug gaming
-	{
-		$this->db->select('tb_inseminasi.tglBeranak, tb_sapi.idSapi');
-		$this->db->join('tb_sapi', 'tb_sapi.idSapi = tb_inseminasi.idSapi');
-		$this->db->where('tb_sapi.idSapi', $id);
-		$check = $this->db->get('tb_inseminasi', 1);
-		return $check->result_array();
-		
-		
-		
-		// $query = $this->db->query("SELECT tglBeranak FROM tb_inseminasi  WHERE idSapi = '$id' ORDER BY tglBeranak 
-		// DESC LIMIT 1" );
-		// return $query->result_array();
-	}
 }
 
 /* End of file M_jmr.php */

@@ -33,19 +33,19 @@ class C_sapi extends CI_Controller
 		$detail = $this->m_sapi->daftarSapiModel($id);
 		$statBunting = $this->m_sapi->statBunting($id);
 		$jenisKelamin = $this->m_sapi->jenisKelamin($id);
-		$IBAwal = $this->m_sapi->tglIBAwal($id);
-		$IBAkhir = $this->m_sapi->tglIBAkhir($id);
+		$firstIB = $this->m_sapi->firstIB($id);
+		$lastIB = $this->m_sapi->lastIB($id);
 		$tglBeranak = $this->m_sapi->tglBeranak($id);
-		$jumlahIB = $this->m_sapi->jumlahIB($id);
+		$totalIB = $this->m_sapi->totalIB($id);
 		
 		$data = array(
 			'idSapi' => $id,
 			'statBunting' => $statBunting,
 			'jenisKelamin' => $jenisKelamin,
-			'IBAwal' => $IBAwal,
-			'IBAkhir' => $IBAkhir,
-			'tglBeranak' => $tglBeranak,
-			'jumlahIB' => $jumlahIB,
+			'firstIB' => $firstIB,
+			'lastIB' => $lastIB,
+			'tglBeranakTerakhir' => $tglBeranak,
+			'jumlahIB' => $totalIB,
 			'tampil' => $detail,
 			'title' => "Detail Sapi"
 		);

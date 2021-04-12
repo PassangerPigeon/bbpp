@@ -21,8 +21,6 @@ $this->load->view('dist/_partials/header');
                             <a href="<?php echo base_url() ?>c_sapi" class="btn btn-primary"><i class="fa fa-caret-left"></i> Kembali</a>
                         </div>
 
-                        <?php print_r($tglBeranak) ?>
-
                         <div class="card-body">
                             <table class="table table-striped table-sm">
 
@@ -37,7 +35,7 @@ $this->load->view('dist/_partials/header');
                                         <th>Total IB</th>
                                         <th>Nilai Kebuntingan</th>
                                         <th>Days</th>
-                                        <th>Nilai JMR</th>
+                                        <th>Penalty</th>
                                         <th colspan="2">Jarak Waktu</th>
                                         <th>Tanggal Kering</th>
                                         <th>Prediksi Kelahiran Berikutnya</th>
@@ -64,25 +62,41 @@ $this->load->view('dist/_partials/header');
                                     </tr>
                                     <?php $no = 1;
                                     foreach ($tampil as $key) : ?>
+                                        <?php
+                                        $vp = $key['jumlahLaktasi'] == 1 ? '80' : ($key['jumlahLaktasi'] > 1) ? '60' : '-';
+                                        $nilaiBunting = $key['statPositif'] == 'Negatif' ? '0' : ($key['statPositif'] == 'Belum dikonfirmasi' ? '1' : ($key['statPositif'] == 'Positif' ? '2' : '-'));
+                                        $partus = new DateTime($key['tglBeranakTerakhir']);
+                                        $firstIB = new DateTime($key['firstIB']);
+                                        $lastIB = new DateTime($key['lastIB']);
+                                        $diff = $partus->diff($lastIB)->format('%a');
+                                        $days = $diff - $vp;
+                                        $serviceD = $firstIB->diff($partus)->format('%a');
+                                        $daysOpen = $firstIB->diff($lastIB)->format('%a');
+                                        if ($nilaiBunting == '2' || $days < '0') {
+                                            $penalty = 0;
+                                        } else {
+                                            $penalty = $days;
+                                        };
+                                        $countPredict = $lastIB->add(new DateInterval('P283D'));
+                                        $predict = $countPredict->format('Y-m-d');
+                                        $kering = $countPredict->sub(new DateInterval('P60D'))->format('Y-m-d') ?>
 
-                                        <tr>
+                                        <tr align="center">
                                             <td><?php echo $no++; ?></td>
-                                            <td><?php echo $key['namaSapi'] ?></td>
+                                            <td align="left"><?php echo $key['namaSapi'] ?></td>
                                             <td><?php echo $key['jumlahLaktasi'] ?></td>
-                                            <td><?php echo ($key['jumlahLaktasi'] == 1 ? '80' : ($key['jumlahLaktasi'] > 1) ? '60' : '-') ?></td>
-                                            <?php foreach ($tglBeranak as $lahir) : ?>
-                                                <td><?php echo $lahir['tglBeranak'] ?></td> <!-- bug gaming -->
-                                            <?php endforeach; ?>
-                                            <td><?php ?></td>
-                                            <td><?php ?></td>
-                                            <td><?php ?></td>
-                                            <td><?php ?></td>
-                                            <td><?php ?></td>
-                                            <td><?php ?></td>
-                                            <td><?php ?></td>
-                                            <td><?php ?></td>
-                                            <td><?php ?></td>
-                                            <td><?php ?></td>
+                                            <td><?php echo $vp ?></td>
+                                            <td><?php echo $key['tglBeranakTerakhir'] ?></td>
+                                            <td><?php echo $key['firstIB'] ?></td>
+                                            <td><?php echo $key['lastIB'] ?></td>
+                                            <td><?php echo $key['jumlahIB'] ?></td>
+                                            <td><?php echo $nilaiBunting ?></td>
+                                            <td><?php echo $days ?></td>
+                                            <td><?php echo $penalty ?></td>
+                                            <td><?php echo $serviceD ?></td>
+                                            <td><?php echo $daysOpen ?></td>
+                                            <td><?php echo $kering ?></td>
+                                            <td><?php echo $predict ?></td>
                                         </tr>
                                     <?php endforeach ?>
                                 </tbody>

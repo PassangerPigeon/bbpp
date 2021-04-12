@@ -17,8 +17,6 @@ class M_inseminasi extends CI_Model
 
 	public function formEditInseminasiModel($id = null)
 	{
-
-
 		$this->db->select("tb_inseminasi.*, tb_sapi.*, tb_inseminasi.tglBeranak AS tglBeranakInseminasi");
 		$this->db->join('tb_sapi', 'tb_sapi.idSapi = tb_inseminasi.idSapi');
 		if ($id != null) {
@@ -40,7 +38,6 @@ class M_inseminasi extends CI_Model
 
 	public function editInseminasiModel($id, $newData)
 	{
-
 		$this->db->where('idInseminasi', $id);
 		$update = $this->db->update('tb_inseminasi', $newData);
 		if ($this->db->affected_rows() > 0) {

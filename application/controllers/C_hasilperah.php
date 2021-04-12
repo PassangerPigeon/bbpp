@@ -38,8 +38,7 @@ class C_hasilperah extends CI_Controller
 		$tglPerah = $this->input->post('tglPerah');
 		$hasilPerahPagi = $this->input->post('hasilPerahPagi');
 		$hasilPerahSore = $this->input->post('hasilPerahSore');
-		$jumlahPerah = $hasilPerahPagi + $hasilPerahSore;
-
+		$jumlahPerah = $this->m_hasilperah->jumlahPerahSapi($idSapi);
 
 		$data =
 			[
@@ -49,7 +48,8 @@ class C_hasilperah extends CI_Controller
 				'hasilPerahSore' => $hasilPerahSore,
 				'jumlahPerah' => $jumlahPerah
 			];
-		$insert = $this->m_hasilperah->tambahHasilPerahModel($data);
+
+		$insert = $this->m_hasilperah->tambahHasilPerahModel($data, $idSapi);
 		if ($insert) {
 			redirect('C_hasilperah/tampilHasilPerah/' . $idSapi, 'refresh');
 		} else {
@@ -74,12 +74,14 @@ class C_hasilperah extends CI_Controller
 		$tglPerah = $this->input->post('tglPerah');
 		$hasilPerahPagi = $this->input->post('hasilPerahPagi');
 		$hasilPerahSore = $this->input->post('hasilPerahSore');
-
+		$jumlahPerah = $this->m_hasilperah->jumlahPerahSapi($idSapi);
 		$data =
 			[
+				'idSapi' => $idSapi,
 				'tglPerah' => $tglPerah,
 				'hasilPerahPagi' => $hasilPerahPagi,
 				'hasilPerahSore' => $hasilPerahSore,
+				'jumlahPerah' => $jumlahPerah
 			];
 		$update = $this->m_hasilperah->editPerahModel($id, $data);
 		if ($update) {

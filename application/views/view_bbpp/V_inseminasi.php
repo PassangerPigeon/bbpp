@@ -25,8 +25,12 @@ $this->load->view('dist/_partials/header');
             <div class="card-header">
 
               <form action="<?php echo base_url() ?>c_inseminasi/formTambahInseminasi" method="POST"><input type="hidden" value="<?php echo $idSapi ?>" name="idSapi"><button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Inseminasi</button></form>
-            
+
             </div>
+
+            <p hidden><?php print_r($this->m_sapi->firstIB($idSapi)) ?></p>
+            <p hidden><?php print_r($this->m_sapi->lastIB($idSapi)) ?></p>
+            <p hidden><?php print_r($this->m_sapi->totalIB($idSapi)) ?></p>
 
             <div class="card-body">
               <table class="table table-striped" id="table-3">
@@ -39,7 +43,7 @@ $this->load->view('dist/_partials/header');
                     <th>Tanggal Inseminasi</th>
                     <th>Status Inseminasi</th>
                     <th>Tanggal Positif</th>
-                    <th>Tanggal Beranak</th>
+                    <th>Tanggal Beranak Terakhir</th>
                     <th>Action</th>
                   </tr>
                 </thead>

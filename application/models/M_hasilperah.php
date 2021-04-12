@@ -26,23 +26,38 @@ class M_hasilperah extends CI_Model
 		return $check->result_array();
 	}
 
-
-
-
-	public function jumlahPerah()
+	public function jumlahPerahSapi($id)
 	{
-		$this->db->select_sum('jumlahPerah');
+		$this->db->select('hasilPerahPagi, hasilPerahSore');
+		$this->db->where('idSapi', $id);
 		$cek = $this->db->get('tb_hasilperah');
-		if ($cek->num_rows() > 0) {
-			return $cek->row()->jumlahPerah;
+		if ($cek) {
+			$this->db->set('jumlahPerah', "hasilPerahPagi + hasilPerahSore", FALSE);
+			$this->db->where('idSapi', $id);
+			$this->db->update('tb_hasilperah');
+
+			return true;
 		}
 		return false;
 	}
 
-
-	public function tambahHasilPerahModel($data)
+	public function perahSapiTotal()
 	{
-		$insert = $this->db->insert('tb_hasilperah', $data);
+		$this->db->select_sum('jumlahPerah');
+		$query = $this->db->get('tb_hasilperah');
+		$cek = $query->result_array();
+		if ($cek) {
+			foreach ($cek as $key) {
+				return $key['jumlahPerah'];
+			}
+		} else {
+			return false;
+		}
+	}
+
+	public function tambahHasilPerahModel($data, $id)
+	{
+		$insert = $this->db->insert('tb_hasilperah', $data, $id);
 		if ($this->db->affected_rows() > 0) {
 			return $insert;
 		} else {
@@ -52,7 +67,6 @@ class M_hasilperah extends CI_Model
 
 	public function editPerahModel($id, $newData)
 	{
-
 		$this->db->where('idPerah', $id);
 		$update = $this->db->update('tb_hasilperah', $newData);
 		if ($this->db->affected_rows() > 0) {

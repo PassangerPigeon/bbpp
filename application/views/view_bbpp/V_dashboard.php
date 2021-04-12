@@ -9,9 +9,9 @@ $this->load->view('dist/_partials/header');
           <div class="section-header">
             <h1>Dashboard</h1>
             <br>
-              
-          
           </div>
+
+          <p hidden><?php print_r($this->m_hasilperah->perahSapiTotal())?></p>
 
           <div class="section-body">
             
@@ -43,7 +43,7 @@ $this->load->view('dist/_partials/header');
                        <div class="row no-gutters align-items-center">
                            <div class="col mr-2">
                                 <div class="font-weight-bold text-uppercase mb-1">Total Hasil Perah</div>
-                                    <div class="h5 mb-0 font-weight-bold"><?php echo $tampilHasilPerah ?> Liter</div>
+                                    <div class="h5 mb-0 font-weight-bold"><?php echo $tampilJumlahPerah ?> Liter</div>
                            </div>
                                 <div class="col-auto">
                                     <i class="fa fa-wine-bottle fa-3x"></i>

@@ -3,8 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_sapi extends CI_Model
 {
-
-
 	public function daftarSapiModel($id = null)
 	{
 		if ($id != null) {
@@ -19,7 +17,6 @@ class M_sapi extends CI_Model
 		$query = $this->db->query("SELECT statInseminasi FROM tb_inseminasi WHERE idSapi = '$id'
 		ORDER BY tglInseminasi DESC LIMIT 1");
 		$cek = $query->result_array();
-
 		if ($cek) {
 			return $cek;
 		} else {
@@ -27,14 +24,40 @@ class M_sapi extends CI_Model
 		}
 	}
 
-	public function tglIBAwal($id)
+	public function firstIB($id)
 	{
-		$query = $this->db->query("SELECT tglInseminasi FROM tb_inseminasi WHERE idSapi = '$id'
-		ORDER BY tglInseminasi ASC LIMIT 1");
+		$this->db->select('tglInseminasi');
+		$this->db->where('idSapi', $id);
+		$this->db->order_by('tglInseminasi', 'asc');
+		$query = $this->db->get('tb_inseminasi', 1);
 		$cek = $query->result_array();
-
 		if ($cek) {
-			return $cek;
+			foreach ($cek as $key) {
+				echo $key['tglInseminasi'];
+				$this->db->where('idSapi', $id);
+				$this->db->set('firstIB', $key['tglInseminasi']);
+				$this->db->update('tb_sapi');
+			}
+		} else {
+			return false;
+		}
+	}
+
+	public function lastIB($id)
+	{
+
+		$this->db->select('tglInseminasi');
+		$this->db->where('idSapi', $id);
+		$this->db->order_by('tglInseminasi', 'desc');
+		$query = $this->db->get('tb_inseminasi', 1);
+		$cek = $query->result_array();
+		if ($cek) {
+			foreach ($cek as $key) {
+				echo $key['tglInseminasi'];
+				$this->db->where('idSapi', $id);
+				$this->db->set('lastIB', $key['tglInseminasi']);
+				$this->db->update('tb_sapi');
+			}
 		} else {
 			return false;
 		}
@@ -44,19 +67,6 @@ class M_sapi extends CI_Model
 	{
 		$query = $this->db->query("SELECT sex FROM tb_sapi WHERE idSapi = '$id'");
 		$cek = $query->result_array();
-		if ($cek) {
-			return $cek;
-		} else {
-			return false;
-		}
-	}
-
-	public function tglIBAkhir($id)
-	{
-		$query = $this->db->query("SELECT tglInseminasi FROM tb_inseminasi WHERE idSapi = '$id'
-		ORDER BY tglInseminasi DESC LIMIT 1");
-		$cek = $query->result_array();
-
 		if ($cek) {
 			return $cek;
 		} else {
@@ -76,16 +86,15 @@ class M_sapi extends CI_Model
 		}
 	}
 
-	public function jumlahIB($id)
+	public function totalIB($id)
 	{
-
 		$this->db->where('idSapi', $id);
 		$cek = $this->db->count_all_results('tb_inseminasi');
-
-		if (
-			$this->db->affected_rows() > 0
-		) {
-			return $cek;
+		if ($cek) {
+			echo $cek;
+			$this->db->set('jumlahIB', $cek);
+			$this->db->where('idSapi', $id);
+			$this->db->update('tb_sapi');
 		} else {
 			return false;
 		}
@@ -93,20 +102,8 @@ class M_sapi extends CI_Model
 
 	public function jumlahSapi()
 	{
-		$cek = $this->db->count_all_results('tb_sapi');
+		$cek = $this->db->count_all('tb_sapi');
 		return $cek;
-	}
-
-	public function voluntaryPeriodModel($id)
-	{
-		$this->db->where('idSapi', $id);
-		$query = $this->db->query("SELECT jumlahLaktasi FROM tb_sapi WHERE idSapi = '$id'");
-		$cek = $query->result_array();
-		if ($cek) {
-			return $cek;
-		} else {
-			return false;
-		}
 	}
 
 	public function tambahSapiModel($data)
@@ -118,16 +115,6 @@ class M_sapi extends CI_Model
 			return false;
 		}
 	}
-	public function hapusSapiModel($id)
-	{
-		$this->db->where('idSapi', $id);
-		$delete = $this->db->delete('tb_sapi');
-		if ($this->db->affected_rows() > 0) {
-			return $delete;
-		} else {
-			return false;
-		}
-	}
 
 	public function editSapiModel($id, $newData)
 	{
@@ -135,6 +122,17 @@ class M_sapi extends CI_Model
 		$update = $this->db->update('tb_sapi', $newData);
 		if ($this->db->affected_rows() > 0) {
 			return $update;
+		} else {
+			return false;
+		}
+	}
+
+	public function hapusSapiModel($id)
+	{
+		$this->db->where('idSapi', $id);
+		$delete = $this->db->delete('tb_sapi');
+		if ($this->db->affected_rows() > 0) {
+			return $delete;
 		} else {
 			return false;
 		}

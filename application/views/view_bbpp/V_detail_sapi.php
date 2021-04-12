@@ -9,8 +9,6 @@ $this->load->view('dist/_partials/header');
     <div class="section-header">
       <h1>Detail Sapi</h1>
       <br>
-
-
     </div>
 
     <div class="section-body">
@@ -62,98 +60,51 @@ $this->load->view('dist/_partials/header');
                       <td><?php echo $key['usia'] ?> tahun</td>
                     </tr>
 
-                    <?php foreach ($tampil as $sex) ?>
-                    <?php if ($sex['sex'] == "Betina") : ?>
+                    <tr>
+                      <td>Jenis Kelamin</td>
+                      <td>:</td>
+                      <td><?php echo $key['sex'] ?></td>
+                    </tr>
 
+                    <?php foreach ($tampil as $sex) : ?>
+                    <?php if ($sex['sex'] == "Betina") : ?>
                       <tr>
                         <td>Status Laktasi</td>
                         <td>:</td>
                         <td><?php echo $key['statLact'] ?> </td>
                       </tr>
-
                       <tr>
                         <td>Jumlah Laktasi</td>
                         <td>:</td>
                         <td><?php echo $key['jumlahLaktasi'] ?> </td>
                       </tr>
-
-                      <?php if ($statBunting) : ?>
-                        <?php foreach ($statBunting as $positif) : ?>
-                          <?php if ($positif) : ?>
-                            <tr>
-                              <td>Status Bunting</td>
-                              <td>:</td>
-                              <td><?php echo $positif['statInseminasi'] ?></td>
-                            </tr>
-                          <?php endif; ?>
-                        <?php endforeach ?>
-                      <?php else : ?>
-                        <tr>
-                          <td>Status Bunting</td>
-                          <td>:</td>
-                          <td>-</td>
-                        </tr>
-                      <?php endif ?>
-
-
-                      <?php if ($tglBeranak) : ?>
-                        <?php foreach ($tglBeranak as $lahir) : ?>
-                          <?php if ($lahir != null) : ?>
-                            <tr>
-                              <td>Tanggal Beranak terakhir</td>
-                              <td>:</td>
-                              <td><?php echo $lahir['tglBeranak'] ?></td>
-                            </tr>
-                          <?php endif; ?>
-                        <?php endforeach ?>
-                      <?php else : ?>
-                        <tr>
-                          <td>Tanggal Beranak terakhir</td>
-                          <td>:</td>
-                          <td>-</td>
-                        </tr>
-                      <?php endif ?>
-
-                      <?php if ($IBAwal) : ?>
-                        <?php foreach ($IBAwal as $awal) : ?>
-                          <tr>
-                            <td>IB Pertama</td>
-                            <td>:</td>
-                            <td><?php echo $awal['tglInseminasi'] ?></td>
-                          </tr>
-                        <?php endforeach ?>
-                      <?php else : ?>
-                        <tr>
-                          <td>IB Pertama</td>
-                          <td>:</td>
-                          <td>-</td>
-                        </tr>
-                      <?php endif ?>
-
-
-                      <?php if ($IBAkhir) : ?>
-                        <?php foreach ($IBAkhir as $akhir) : ?>
-                          <tr>
-                            <td>IB Terakhir</td>
-                            <td>:</td>
-                            <td><?php echo $akhir['tglInseminasi'] ?></td>
-                          </tr>
-                        <?php endforeach ?>
-                      <?php else : ?>
-                        <tr>
-                          <td>IB Terakhir</td>
-                          <td>:</td>
-                          <td>-</td>
-                        </tr>
-                      <?php endif ?>
-
-
+                      <tr>
+                        <td>Status Bunting</td>
+                        <td>:</td>
+                        <td><?php echo $key['statPositif'] ?></td>
+                      </tr>
+                      <tr>
+                        <td>Tanggal Beranak terakhir</td>
+                        <td>:</td>
+                        <td><?php echo $key['tglBeranakTerakhir'] ?></td>
+                      </tr>
+                      <tr>
+                        <td>IB Pertama</td>
+                        <td>:</td>
+                        <td><?php echo $key['firstIB'] ?></td>
+                      </tr>
+                      <tr>
+                        <td>IB Terakhir</td>
+                        <td>:</td>
+                        <td><?php echo $key['lastIB'] ?></td>
+                      </tr>
                       <tr>
                         <td>Total IB</td>
                         <td>:</td>
-                        <td><?php echo $jumlahIB ?></td>
+                        <td><?php echo $key['jumlahIB'] ?></td>
                       </tr>
                     <?php endif; ?>
+                    <?php endforeach ?>
                   <?php endforeach ?>
                   </table>
                 </div>

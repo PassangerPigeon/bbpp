@@ -17,7 +17,7 @@ class C_dashboard extends CI_Controller {
         $data = array(
             "tampilSapi" => $this->m_sapi->daftarSapiModel(),
             "tampilJumlahSapi" => $this->m_sapi->jumlahSapi(),
-            "tampilHasilPerah" => $this->m_hasilperah->jumlahPerah(),
+            "tampilJumlahPerah" => $this->m_hasilperah->perahSapiTotal(),
             "tampilUser" => $this->m_user->totalUser()
         );
 		$this->load->view('view_bbpp/v_dashboard', $data);

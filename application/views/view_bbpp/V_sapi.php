@@ -11,12 +11,9 @@ $this->load->view('dist/_partials/header');
     <div class="section-header">
       <h1>Daftar Sapi</h1>
       <br>
-
-
     </div>
 
     <div class="section-body">
-
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card">
@@ -24,7 +21,7 @@ $this->load->view('dist/_partials/header');
             <div class="card-header">
               <a href="<?php echo base_url() ?>c_sapi/formTambahSapi" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Sapi</a>
             </div>
-
+            
             <div class="card-body">
               <table class="table table-striped" id="table-3">
 

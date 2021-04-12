@@ -49,8 +49,19 @@ class C_inseminasi extends CI_Controller
 				'tglPositif' => $tglPositif,
 				'tglBeranak' => $tglBeranak
 			];
+
+		$data2 =
+			[
+				'idSapi' => $idSapi,
+				'statPositif' => $statInseminasi,
+				'tglBeranakTerakhir' => $tglBeranak,
+				'firstIB' => $this->m_sapi->firstIB($idSapi),
+				'lastIB' => $this->m_sapi->lastIB($idSapi),
+				'jumlahIB' => $this->m_sapi->totalIB($idSapi)
+			];
 		$insert = $this->m_inseminasi->tambahInseminasiModel($data);
-		if ($insert) {
+		$insert2 = $this->m_sapi->editSapiModel($idSapi, $data2);
+		if ($insert && $insert2) {
 			redirect('C_inseminasi/lihatInseminasi/' . $idSapi, 'refresh');
 		} else {
 			echo 'gagal';
@@ -86,8 +97,19 @@ class C_inseminasi extends CI_Controller
 				'tglPositif' => $tglPositif,
 				'tglBeranak' => $tglBeranak
 			];
+
+		$data2 =
+			[
+				'idSapi' => $idSapi,
+				'statPositif' => $statInseminasi,
+				'tglBeranakTerakhir' => $tglBeranak,
+				'firstIB' => $this->m_sapi->firstIB($idSapi),
+				'lastIB' => $this->m_sapi->lastIB($idSapi),
+				'jumlahIB' => $this->m_sapi->totalIB($idSapi)
+			];
 		$update = $this->m_inseminasi->editInseminasiModel($id, $data);
-		if ($update) {
+		$update2 = $this->m_sapi->editSapiModel($idSapi, $data2);
+		if ($update && $update2) {
 			redirect('C_inseminasi/lihatInseminasi/' . $idSapi, 'refresh');
 		} else {
 			echo 'gagal';

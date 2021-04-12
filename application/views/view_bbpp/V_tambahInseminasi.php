@@ -43,6 +43,11 @@ $this->load->view('dist/_partials/header');
                           </div>
 
                           <div class="form-group">
+                              <label for="tglBeranak">Tanggal Beranak Terakhir</label>
+                              <input type="date" name="tglBeranak" id="tglBeranak" class="form-control">      
+                         </div>
+
+                          <div class="form-group">
                               <label for="tglInseminasi">Tanggal Inseminasi</label>
                               <input type="date" name="tglInseminasi" id="tglInseminasi" class="form-control">      
                          </div>
@@ -51,19 +56,15 @@ $this->load->view('dist/_partials/header');
                               <label for="statInseminasi">Status Inseminasi</label>
                               <select name="statInseminasi" id="statInseminasi" class="form-control">
                                   <option value="">-- Pilih Status Inseminasi --</option>
-                                  <option value="berhasil">Berhasil</option>
-                                  <option value="tidak berhasil">Tidak Berhasil</option>
+                                  <option value="Positif">Positif</option>
+                                  <option value="Negatif">Negatif</option>
+                                  <option value="Belum dikonfirmasi">Sudah Inseminasi, Belum Dikonfirmasi </option>
                                 </select>
                          </div>
 
                          <div class="form-group">
                               <label for="tglPositif">Tanggal Positif</label>
                               <input type="date" name="tglPositif" id="tglPositif" class="form-control">      
-                         </div>
-
-                         <div class="form-group">
-                              <label for="tglBeranak">Tanggal Beranak</label>
-                              <input type="date" name="tglBeranak" id="tglBeranak" class="form-control">      
                          </div>
 
                         <button type="reset" class="btn btn-danger btn-sm">Reset</button>
