@@ -31,6 +31,23 @@ class C_kesehatan extends CI_Controller
 		);
 		$this->load->view('view_bbpp/v_detailKesehatan', $data);
 	}
+
+	public function verifKesehatan($id)
+	{
+		
+		$verif = $this->input->post('statusPetugasKesehatan');
+
+		$data=[
+			'statusPetugasKesehatan' => $verif
+		];
+		$update = $this->m_kesehatan->verifKesehatanModel($id, $data);
+		if($update){
+			redirect('C_kesehatan, refresh');
+		}
+		else{
+			echo "gagal";
+		}
+	}
 }
 
 /* End of file C_kesehatan.php */

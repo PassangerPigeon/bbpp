@@ -32,7 +32,6 @@ class C_user extends CI_Controller
 
 		$this->form_validation->set_rules('username', 'Username', 'is_unique[tb_user.username]');
 		$this->form_validation->set_rules('nomorTelp', 'Nomor Telepon', 'max_length[15]|is_unique[tb_user.nomorTelp]');
-
 		$this->form_validation->set_rules('pass', 'Password', 'min_length[8]');
 		$this->form_validation->set_rules('konfirmasi_password', 'Konfirmasi Password', 'matches[pass]');
 
@@ -135,7 +134,7 @@ class C_user extends CI_Controller
 		$password = sha1($this->input->post('pass'));
 
 		$cekdata = $this->m_user->userVerif($username, $password);
-		
+
 
 		if ($cekdata) {
 
@@ -148,11 +147,7 @@ class C_user extends CI_Controller
 					'jabatan' => $key['jabatan']
 				);
 
-				
-
 				$this->session->set_userdata($array);
-
-
 
 				if (($this->session->userdata('jabatan') === 'admin') || ($this->session->userdata('jabatan') === 'kepala kandang')) {
 					redirect('c_dashboard');
@@ -167,7 +162,7 @@ class C_user extends CI_Controller
 		} else {
 			$data['pesan'] = '<div class="alert alert-danger alert-dismissible">
 		<h4><b>X</b> Failed!</h4>
-		Login Gagal.
+		Username atau password salah	.
 	  </div>';
 
 			$this->load->view('dist/auth-login', $data);

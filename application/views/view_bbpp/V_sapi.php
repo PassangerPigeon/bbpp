@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 $this->load->view('dist/_partials/header');
 ?>
+
 <!-- Main Content -->
 <div class="main-content">
   <section class="section">
@@ -21,7 +22,7 @@ $this->load->view('dist/_partials/header');
             <div class="card-header">
               <a href="<?php echo base_url() ?>c_sapi/formTambahSapi" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Sapi</a>
             </div>
-            
+
             <div class="card-body">
               <table class="table table-striped" id="table-3">
 
@@ -54,7 +55,7 @@ $this->load->view('dist/_partials/header');
                         <a href="<?php echo base_url() ?>c_sapi/detail_sapi/<?php echo $key['idSapi'] ?>" class="btn btn-success">Lihat Detail</a>
                         <a href="<?php echo base_url() ?>c_hasilperah/tampilHasilPerah/<?php echo $key['idSapi'] ?>" class="btn btn-warning">Hasil Perah</a>
                         <a href="<?php echo base_url() ?>c_inseminasi/lihatInseminasi/<?php echo $key['idSapi'] ?>" class="btn btn-primary">Inseminasi</a>
-                        <a href="<?php echo base_url() ?>C_sapi/hapusSapi/<?php echo $key['idSapi'] ?>" class="btn btn-danger">Hapus</a>
+                        <a href="#modalHapus" data-toggle="modal" onclick="$('#modalHapus #formHapus').attr('action', '<?php echo base_url() ?>c_sapi/hapusSapi/<?php echo $key['idSapi'] ?>')" class="btn btn-danger">Hapus</a>
                       </td>
                     </tr>
                   <?php endforeach ?>
@@ -66,5 +67,26 @@ $this->load->view('dist/_partials/header');
       </div>
     </div>
   </section>
+  <div class="modal fade" id="modalHapus">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Konfirmasi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Apa anda yakin ingin menghapus data ini.</p>
+        </div>
+        <div class="modal-footer bg-whitesmoke br">
+          <form id="formHapus" action="" method="post">
+            <button class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button class="btn btn-danger" type="submit">Hapus</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> 
 </div>
 <?php $this->load->view('dist/_partials/footer'); ?>

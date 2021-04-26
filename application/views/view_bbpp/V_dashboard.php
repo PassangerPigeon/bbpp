@@ -1,90 +1,89 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $this->load->view('dist/_partials/header');
 ?>
-      <!-- Main Content -->
-      <div class="main-content">
-        <section class="section">
-          
-          <div class="section-header">
-            <h1>Dashboard</h1>
-            <br>
+<!-- Main Content -->
+<div class="main-content">
+  <section class="section">
+
+    <div class="section-header">
+      <h1>Dashboard</h1>
+      <br>
+    </div>
+
+    <p hidden><?php print_r($this->m_hasilperah->perahSapiTotal()) ?></p>
+
+    <div class="section-body">
+
+      <div class="row">
+        <div class="col-4 col-md-4 col-lg-4">
+          <div class="card">
+            <div class="card-body">
+
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="font-weight-bold text-uppercase mb-1">Total Sapi</div>
+                  <div class="h5 mb-0 font-weight-bold"><?php echo $tampilJumlahSapi ?> Ekor</div>
+
+                </div>
+                <div class="col-auto">
+                  <i class="fa fa-paw fa-3x"></i>
+                </div>
+              </div>
+
+            </div>
           </div>
+        </div>
 
-          <p hidden><?php print_r($this->m_hasilperah->perahSapiTotal())?></p>
+        <div class="col-4 col-md-4 col-lg-4">
+          <div class="card">
+            <div class="card-body">
 
-          <div class="section-body">
-            
-            <div class="row">
-              <div class="col-4 col-md-4 col-lg-4">
-                <div class="card">
-                    <div class="card-body">
 
-                       <div class="row no-gutters align-items-center">
-                           <div class="col mr-2">
-                                <div class="font-weight-bold text-uppercase mb-1">Total Sapi</div>
-                                    <div class="h5 mb-0 font-weight-bold"><?php echo $tampilJumlahSapi ?> Ekor</div>
-                                    
-                           </div>
-                                <div class="col-auto">
-                                    <i class="fa fa-paw fa-3x"></i>
-                                </div>
-                      </div>
-          
-                    </div>  
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="font-weight-bold text-uppercase mb-1">Total Hasil Perah</div>
+                  <div class="h5 mb-0 font-weight-bold"><?php echo $tampilJumlahPerah ?> Liter</div>
+                </div>
+                <div class="col-auto">
+                  <i class="fa fa-wine-bottle fa-3x"></i>
                 </div>
               </div>
 
-              <div class="col-4 col-md-4 col-lg-4">
-                <div class="card">
-                    <div class="card-body">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4 col-md-4 col-lg-4">
+          <div class="card">
+            <div class="card-body">
 
 
-                       <div class="row no-gutters align-items-center">
-                           <div class="col mr-2">
-                                <div class="font-weight-bold text-uppercase mb-1">Total Hasil Perah</div>
-                                    <div class="h5 mb-0 font-weight-bold"><?php echo $tampilJumlahPerah ?> Liter</div>
-                           </div>
-                                <div class="col-auto">
-                                    <i class="fa fa-wine-bottle fa-3x"></i>
-                                </div>
-                      </div>
-          
-                    </div>  
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="font-weight-bold text-uppercase mb-1">Total User</div>
+                  <div class="h5 mb-0 font-weight-bold"><?php echo $tampilUser ?> Orang</div>
+                </div>
+                <div class="col-auto">
+                  <i class="fa fa-users fa-3x"></i>
                 </div>
               </div>
 
-              <div class="col-4 col-md-4 col-lg-4">
-                <div class="card">
-                    <div class="card-body">
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-                       <div class="row no-gutters align-items-center">
-                           <div class="col mr-2">
-                                <div class="font-weight-bold text-uppercase mb-1">Total User</div>
-                                    <div class="h5 mb-0 font-weight-bold"><?php echo $tampilUser ?> Orang</div>
-                           </div>
-                                <div class="col-auto">
-                                    <i class="fa fa-users fa-3x"></i>
-                                </div>
-                      </div>
-          
-                    </div>  
-                </div>
-              </div>
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h4>Daftar Sapi</h4>
             </div>
 
-            <div class="row">
-              <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                     <div class="card-header">
-                        <h4>Daftar Sapi</h4>
-                    </div>
-
-                    <div class="card-body">
-                      <table class="table table-striped" id="halaman_dashboard">
-                    
-                      <thead>
+            <div class="card-body">
+              <table class="table table-striped" id="halaman_dashboard">
+                <thead>
                   <tr>
                     <th>No</th>
                     <th>Nama Sapi</th>
@@ -116,18 +115,13 @@ $this->load->view('dist/_partials/header');
                     </tr>
                   <?php endforeach ?>
                 </tbody>
-                      </table>
-                       <a href="<?php echo base_url() ?>pemesanan">Lihat Daftar Sapi Selengkapnya ............</a>  
-                    </div>    
-                </div>
-                
-              </div>
+              </table>
+              <a href="<?php echo base_url() ?>c_sapi">Lihat Daftar Sapi Selengkapnya ............</a>
             </div>
-
-            
-
-
           </div>
-        </section>
+        </div>
       </div>
+    </div>
+  </section>
+</div>
 <?php $this->load->view('dist/_partials/footer'); ?>

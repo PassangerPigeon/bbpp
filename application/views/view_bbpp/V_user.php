@@ -49,8 +49,7 @@ $this->load->view('dist/_partials/header');
                       <td><?php echo $key['alamat'] ?></td>
                       <td>
                         <a href="<?php echo base_url() ?>c_user/formEditUser/<?php echo $key['idUser'] ?>" class="btn btn-success">Edit</a>
-                        <a href="<?php echo base_url() ?>C_user/hapusUser/<?php echo $key['idUser'] ?>" class='btn btn-danger'>Hapus</a>
-                      </td>
+                        <a href="#modalHapus" data-toggle="modal" onclick="$('#modalHapus #formHapus').attr('action', '<?php echo base_url() ?>c_user/hapusUser/<?php echo $key['idUser'] ?>')" class="btn btn-danger">Hapus</a>
                     </tr>
                   <?php endforeach ?>
                   </tr>
@@ -62,5 +61,25 @@ $this->load->view('dist/_partials/header');
       </div>
     </div>
   </section>
-</div>
-<?php $this->load->view('dist/_partials/footer'); ?>
+  <div class="modal fade" id="modalHapus">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Konfirmasi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Apa anda yakin ingin menghapus data ini.</p>
+        </div>
+        <div class="modal-footer bg-whitesmoke br">
+          <form id="formHapus" action="" method="post">
+            <button class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button class="btn btn-danger" type="submit">Hapus</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php $this->load->view('dist/_partials/footer'); ?>

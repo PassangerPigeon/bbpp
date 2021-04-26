@@ -10,8 +10,6 @@ class C_sapi extends CI_Controller
 		$this->load->model('m_sapi');
 		$this->load->model('m_inseminasi');
 		$this->load->model('m_log');
-		
-		
 	}
 
 	public function index()
@@ -37,7 +35,7 @@ class C_sapi extends CI_Controller
 		$lastIB = $this->m_sapi->lastIB($id);
 		$tglBeranak = $this->m_sapi->tglBeranak($id);
 		$totalIB = $this->m_sapi->totalIB($id);
-		
+
 		$data = array(
 			'idSapi' => $id,
 			'statBunting' => $statBunting,
@@ -92,9 +90,9 @@ class C_sapi extends CI_Controller
 				$log = $this->m_log->tambahLogModel($dataLog);
 				if ($log) {
 					redirect('C_sapi', 'refresh');
-				}else{
+				} else {
 					echo "data log gagal";
-				}	
+				}
 			} else {
 				echo 'gagal';
 			}
@@ -117,7 +115,6 @@ class C_sapi extends CI_Controller
 		if ($gambar == false) {
 			redirect('c_sapi/formEditSapi', 'refresh');
 		} else {
-
 			$namaSapi = $this->input->post('nama_sapi');
 			$tanggal_lahir = $this->input->post('tanggal_lahir');
 			$usia = $this->input->post('usia');
@@ -138,9 +135,23 @@ class C_sapi extends CI_Controller
 					'jumlahLaktasi' => $jumlahLaktasi,
 					'fotoSapi' => $foto_sapi
 				];
+			date_default_timezone_set("Asia/Bangkok");
+			
+			$pesanLog = "Mengubah data sapi "."(".$namaSapi.")";
+			$dataLog = [
+				'idUser' => $this->session->userdata('idUser'),
+				'tglLog' => date("Y-m-d"),
+				'jamLog' => date("h:i:s"),
+				'isiLog' => $pesanLog
+			];
 			$update = $this->m_sapi->editSapiModel($id, $data);
 			if ($update) {
-				redirect('C_sapi', 'refresh');
+				$log = $this->m_log->tambahLogModel($dataLog);
+				if ($log) {
+					redirect('C_sapi', 'refresh');
+				} else {
+					echo "data log gagal";
+				}
 			} else {
 				echo 'gagal';
 			}
@@ -165,13 +176,32 @@ class C_sapi extends CI_Controller
 		}
 	}
 
-
-
 	public function hapusSapi($id)
 	{
+		$this->db->select('namaSapi');
+		$this->db->where('idSapi', $id);
+		$query = $this->db->get('tb_sapi',1);
+		$namaSapi =  $query->result_array();
 		$delete = $this->m_sapi->hapusSapiModel($id);
+		foreach ($namaSapi as $key) {
+			$namaSapi = $key['namaSapi'];
+		}
+		date_default_timezone_set("Asia/Bangkok");
+			
+			$pesanLog = "Menghapus data sapi "."(".$namaSapi.")";
+			$dataLog = [
+				'idUser' => $this->session->userdata('idUser'),
+				'tglLog' => date("Y-m-d"),
+				'jamLog' => date("h:i:s"),
+				'isiLog' => $pesanLog
+			];
 		if ($delete) {
-			redirect('C_sapi', 'refresh');
+			$log = $this->m_log->tambahLogModel($dataLog);
+			if ($log) {
+				redirect('C_sapi', 'refresh');
+			} else {
+				echo "data log gagal";
+			}
 		} else {
 			echo 'gagal';
 		}
@@ -191,7 +221,6 @@ class C_sapi extends CI_Controller
 
 			if ($error === 0) {
 				if ($size <= 2000000) {
-
 					move_uploaded_file($tmp_name, './././upload/' . $nama_file_baru); //dipindah ke folder upload lalu diubah namanya
 					return $nama_file_baru;
 				} else {

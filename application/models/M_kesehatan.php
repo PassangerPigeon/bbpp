@@ -19,6 +19,17 @@ class M_kesehatan extends CI_Model {
 		}
 	}
 
+	public function verifKesehatanModel($id, $data)
+	{
+		$this->db->where('idCek', $id);
+		$update = $this->db->update('tb_cekkesehatan', $data);
+		if($this->db->affected_rows() > 0) {
+			return $update;
+		} else {
+			return false;		}
+		
+	}
+
 }
 
 /* End of file M_kesehatan.php */

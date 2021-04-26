@@ -9,6 +9,7 @@ class C_hasilperah extends CI_Controller
 		parent::__construct();
 		$this->load->model('m_hasilperah');
 		$this->load->model('m_sapi');
+		$this->load->model('m_log');
 	}
 
 	public function tampilHasilPerah($id = null)
@@ -49,14 +50,26 @@ class C_hasilperah extends CI_Controller
 				'jumlahPerah' => $jumlahPerah
 			];
 
+		date_default_timezone_set("Asia/Bangkok");
+		$pesanLog = "Menambah hasil perah baru";
+		$dataLog = [
+			'idUser' => $this->session->userdata('idUser'),
+			'tglLog' => date("Y-m-d"),
+			'jamLog' => date("h:i:s"),
+			'isiLog' => $pesanLog
+		];
 		$insert = $this->m_hasilperah->tambahHasilPerahModel($data, $idSapi);
 		if ($insert) {
-			redirect('C_hasilperah/tampilHasilPerah/' . $idSapi, 'refresh');
+			$log = $this->m_log->tambahLogModel($dataLog);
+			if ($log) {
+				redirect('C_hasilperah/tampilHasilPerah/'.$idSapi, 'refresh');
+			} else {
+				echo "data log gagal";
+			}
 		} else {
 			echo 'gagal';
 		}
 	}
-
 	public function formEditPerah($id)
 	{
 
@@ -83,9 +96,23 @@ class C_hasilperah extends CI_Controller
 				'hasilPerahSore' => $hasilPerahSore,
 				'jumlahPerah' => $jumlahPerah
 			];
+
+		date_default_timezone_set("Asia/Bangkok");
+		$pesanLog = "Mengubah data hasil perah";
+		$dataLog = [
+			'idUser' => $this->session->userdata('idUser'),
+			'tglLog' => date("Y-m-d"),
+			'jamLog' => date("h:i:s"),
+			'isiLog' => $pesanLog
+		];
 		$update = $this->m_hasilperah->editPerahModel($id, $data);
 		if ($update) {
-			redirect('C_hasilperah/tampilHasilPerah/' . $idSapi, 'refresh');
+			$log = $this->m_log->tambahLogModel($dataLog);
+			if ($log) {
+				redirect('C_hasilperah/tampilHasilPerah/'.$idSapi, 'refresh');
+			} else {
+				echo "data log gagal";
+			}
 		} else {
 			echo 'gagal';
 		}
@@ -94,15 +121,28 @@ class C_hasilperah extends CI_Controller
 	//Delete one item
 	public function hapusHasilPerah($id, $idSapi)
 	{
-
 		$delete = $this->m_hasilperah->hapusPerahModel($id);
+		date_default_timezone_set("Asia/Bangkok");
+		$pesanLog = "Menghapus data hasil perah";
+		$dataLog = [
+			'idUser' => $this->session->userdata('idUser'),
+			'tglLog' => date("Y-m-d"),
+			'jamLog' => date("h:i:s"),
+			'isiLog' => $pesanLog
+		];
 		if ($delete) {
-			redirect('C_hasilperah/tampilHasilPerah/' . $idSapi, 'refresh');
+			$log = $this->m_log->tambahLogModel($dataLog);
+			if ($log) {
+				redirect('C_hasilperah/tampilHasilPerah/'.$idSapi, 'refresh');
+			} else {
+				echo "data log gagal";
+			}
 		} else {
 			echo 'gagal';
 		}
 	}
 }
+
 
 /* End of file C_hasilperah.php */
 /* Location: ./application/controllers/C_hasilperah.php */

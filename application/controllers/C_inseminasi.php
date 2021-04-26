@@ -9,6 +9,7 @@ class C_inseminasi extends CI_Controller
 		parent::__construct();
 		$this->load->model('m_inseminasi');
 		$this->load->model('m_sapi');
+		$this->load->model('m_log');
 	}
 
 	public function lihatInseminasi($id = null)
@@ -32,39 +33,61 @@ class C_inseminasi extends CI_Controller
 	}
 	public function tambahInseminasi()
 	{
-		$idSapi = $this->input->post('idSapi');
-		$asalSperma = $this->input->post('asalSperma');
-		$tglInseminasi = $this->input->post('tglInseminasi');
-		$statInseminasi = $this->input->post('statInseminasi');
-		$tglPositif = $this->input->post('tglPositif');
-		$tglBeranak = $this->input->post('tglBeranak');
+		$this->form_validation->set_rules('tglInseminasi', 'Tanggal Inseminasi', 'required|is_unique[tb_inseminasi.tglInseminasi]');
+		$this->form_validation->set_rules('asalSperma', 'Asal Sperma', 'required');
+		$this->form_validation->set_message('is_unique', 'Sapi telah melakukan inseminasi buatan');
+		$this->form_validation->set_message('required', 'Tolong isi %s');
 
-
-		$data =
-			[
-				'idSapi' => $idSapi,
-				'asalSperma' => $asalSperma,
-				'tglInseminasi' => $tglInseminasi,
-				'statInseminasi' => $statInseminasi,
-				'tglPositif' => $tglPositif,
-				'tglBeranak' => $tglBeranak
-			];
-
-		$data2 =
-			[
-				'idSapi' => $idSapi,
-				'statPositif' => $statInseminasi,
-				'tglBeranakTerakhir' => $tglBeranak,
-				'firstIB' => $this->m_sapi->firstIB($idSapi),
-				'lastIB' => $this->m_sapi->lastIB($idSapi),
-				'jumlahIB' => $this->m_sapi->totalIB($idSapi)
-			];
-		$insert = $this->m_inseminasi->tambahInseminasiModel($data);
-		$insert2 = $this->m_sapi->editSapiModel($idSapi, $data2);
-		if ($insert && $insert2) {
-			redirect('C_inseminasi/lihatInseminasi/' . $idSapi, 'refresh');
+		if ($this->form_validation->run() == FALSE) {
+			$this->formTambahInseminasi();
 		} else {
-			echo 'gagal';
+			$idSapi = $this->input->post('idSapi');
+			$asalSperma = $this->input->post('asalSperma');
+			$tglInseminasi = $this->input->post('tglInseminasi');
+			$statInseminasi = $this->input->post('statInseminasi');
+			$tglPositif = $this->input->post('tglPositif');
+			$tglBeranak = $this->input->post('tglBeranak');
+
+
+			$data =
+				[
+					'idSapi' => $idSapi,
+					'asalSperma' => $asalSperma,
+					'tglInseminasi' => $tglInseminasi,
+					'statInseminasi' => $statInseminasi,
+					'tglPositif' => $tglPositif,
+					'tglBeranak' => $tglBeranak
+				];
+
+			$data2 =
+				[
+					'idSapi' => $idSapi,
+					'statPositif' => $statInseminasi,
+					'tglBeranakTerakhir' => $tglBeranak,
+					'firstIB' => $this->m_sapi->firstIB($idSapi),
+					'lastIB' => $this->m_sapi->lastIB($idSapi),
+					'jumlahIB' => $this->m_sapi->totalIB($idSapi)
+				];
+			date_default_timezone_set("Asia/Bangkok");
+			$pesanLog = "Menambah inseminasi baru";
+			$dataLog = [
+				'idUser' => $this->session->userdata('idUser'),
+				'tglLog' => date("Y-m-d"),
+				'jamLog' => date("h:i:s"),
+				'isiLog' => $pesanLog
+			];
+			$insert = $this->m_inseminasi->tambahInseminasiModel($data);
+			$insert2 = $this->m_sapi->editSapiModel($idSapi, $data2);
+			if ($insert && $insert2) {
+				$log = $this->m_log->tambahLogModel($dataLog);
+				if ($log) {
+					redirect('C_inseminasi/lihatInseminasi/' . $idSapi, 'refresh');
+				} else {
+					echo "data log gagal";
+				}
+			} else {
+				echo 'gagal';
+			}
 		}
 	}
 
@@ -79,6 +102,9 @@ class C_inseminasi extends CI_Controller
 
 	public function editInseminasi($id)
 	{
+		$this->form_validation->set_rules('tglInseminasi', 'Tanggal Inseminasi', 'is_unique[tb_inseminasi.tglInseminasi]');
+
+		$this->form_validation->set_message('is_unique', '%s Sapi telah melakukan inseminasi buatan');
 
 		$idSapi = $this->input->post('idSapi');
 		$asalSperma = $this->input->post('asalSperma');
@@ -107,20 +133,43 @@ class C_inseminasi extends CI_Controller
 				'lastIB' => $this->m_sapi->lastIB($idSapi),
 				'jumlahIB' => $this->m_sapi->totalIB($idSapi)
 			];
+		$pesanLog = "Mengubah data inseminasi";
+		$dataLog = [
+			'idUser' => $this->session->userdata('idUser'),
+			'tglLog' => date("Y-m-d"),
+			'jamLog' => date("h:i:s"),
+			'isiLog' => $pesanLog
+		];
 		$update = $this->m_inseminasi->editInseminasiModel($id, $data);
 		$update2 = $this->m_sapi->editSapiModel($idSapi, $data2);
 		if ($update && $update2) {
-			redirect('C_inseminasi/lihatInseminasi/' . $idSapi, 'refresh');
+			$log = $this->m_log->tambahLogModel($dataLog);
+			if ($log) {
+				redirect('C_inseminasi/lihatInseminasi/' . $idSapi, 'refresh');
+			} else {
+				echo "data log gagal";
+			}
 		} else {
 			echo 'gagal';
 		}
 	}
 	public function hapusInseminasi($id, $idSapi)
 	{
-
+		$pesanLog = "Menghapus data inseminasi";
+		$dataLog = [
+			'idUser' => $this->session->userdata('idUser'),
+			'tglLog' => date("Y-m-d"),
+			'jamLog' => date("h:i:s"),
+			'isiLog' => $pesanLog
+		];
 		$delete = $this->m_inseminasi->hapusInseminasiModel($id);
 		if ($delete) {
-			redirect('C_inseminasi/lihatInseminasi/' . $idSapi, 'refresh');
+			$log = $this->m_log->tambahLogModel($dataLog);
+			if ($log) {
+				redirect('C_inseminasi/lihatInseminasi/' . $idSapi, 'refresh');
+			} else {
+				echo "data log gagal";
+			}
 		} else {
 			echo 'gagal';
 		}

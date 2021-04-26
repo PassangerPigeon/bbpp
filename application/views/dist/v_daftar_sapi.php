@@ -24,14 +24,9 @@ $this->load->view('dist/_partials/header');
                       <button class="btn btn-primary">Tambah Add</button>  
                   </div>
                 </div>
-
-               
+              
               </div>
             </div>
-
-            
-
-
           </div>
         </section>
       </div>

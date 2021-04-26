@@ -24,13 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <li><a class="nav-link" href="<?php echo base_url(); ?>c_user"><i class="far fa-circle"></i> <span>Daftar User</span></a></li>
 
-
-
             <li class="menu-header">Pages</li>
              <li><a class="nav-link" href="<?php echo base_url(); ?>c_user/logout" style="background-color: #db4f40; color: white"><i class="far fa-circle"></i> <span>Logout</span></a></li>
           
-          </ul>
-
-          
+          </ul>          
         </aside>
       </div>

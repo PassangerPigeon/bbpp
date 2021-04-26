@@ -17,6 +17,7 @@ $this->load->view('dist/_partials/header');
               <div class="card-header">
                 <h4>Login</h4>
               </div>
+              
               <?php if (isset($pesan)) : ?>
                 <?php echo $pesan; ?>
               <?php endif ?>
@@ -34,25 +35,27 @@ $this->load->view('dist/_partials/header');
                     <div class="d-block">
                       <label for="pass" class="control-label">Password</label>
                     </div>
+
                     <input id="pass" type="password" class="form-control" name="pass" tabindex="2" required>
                     <div class="invalid-feedback">
                       please fill in your password
                     </div>
                   </div>
 
-
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                       Login
                     </button>
                   </div>
+                  
                 </form>
-
               </div>
             </div>
+
             <div class="simple-footer">
               Copyright &copy; Stisla 2018
             </div>
+            
           </div>
         </div>
       </div>

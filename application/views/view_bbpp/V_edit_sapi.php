@@ -64,13 +64,12 @@ $this->load->view('dist/_partials/header');
 
                                     <div class="form-group">
                                         <label for="jumlahLaktasi">Jumlah Laktasi</label>
-                                        <input type="number" name="jumlahLaktasi" id="jumlahLaktasi" class="form-control">
+                                        <input type="number" name="jumlahLaktasi" id="jumlahLaktasi" class="form-control" value="<?php echo $key['jumlahLaktasi'] ?>">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="fotoSapi">Foto Sapi</label>
                                         <div>
-
                                             <img src="<?php echo base_url() ?>upload/<?php echo $key['fotoSapi'] ?>" width="120px" style="margin-bottom: 5px">
                                         </div>
                                         <sub>Note : Format Gambar JPG & PNG , Ukuran Max 2 MB </sub>

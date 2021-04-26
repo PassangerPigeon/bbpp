@@ -26,14 +26,15 @@ $this->load->view('dist/_partials/header');
                         <div class="card-body">
                             <?php foreach ($tampil as $key) { ?>
                                 <form action="<?php echo base_url() ?>C_user/editUser/<?php echo $key['idUser'] ?>" method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label for="namaUser">Nama User</label>
-                                        <input type="text" id="namaUser" name="namaUser" class="form-control" value="<?php echo $key['namaUser'] ?>">
+                                    <div class="form-group <?php echo form_error('namaUser') ? 'has-error' : null ?>">
+                                        <label for="namaUser">Nama Pengguna</label>
+                                        <input type="text" id="namaUser" name="namaUser" class="form-control" value="<?php echo $key['namaUser'] ?>" readonly>
+                                        <span class="help-block" style="color: red"><?php echo form_error('namaUser') ?></span>
                                     </div>
 
                                     <div class="form-group <?php echo form_error('username') ? 'has-error' : null ?>">
                                         <label for="username">Username</label>
-                                        <input type="text" id="username" name="username" class="form-control" value="<?php echo $key['username'] ?>">
+                                        <input type="text" id="username" name="username" class="form-control" value="<?php echo $key['username'] ?>" >
                                         <span class="help-block" style="color: red"><?php echo form_error('username') ?></span>
                                     </div>
 
@@ -49,7 +50,7 @@ $this->load->view('dist/_partials/header');
                                         <span class="help-block" style="color: red"><?php echo form_error('konfirmasi_password') ?></span>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group <?php echo form_error('jabatan') ? 'has-error' : null ?>">
                                         <label for="jabatan">Jabatan</label>
                                         <select name="jabatan" id="jabatan" class="form-control">
                                             <option value="">--Pilih--</option>
@@ -64,14 +65,14 @@ $this->load->view('dist/_partials/header');
                                         <span class="help-block" style="color: red"><?php echo form_error('nomorTelp') ?></span>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group <?php echo form_error('alamat') ? 'has-error' : null ?>">
                                         <label for="alamat">Alamat</label>
-                                        <textarea name="alamat" class="form-control" id="alamat" value="<?php echo $key['alamat'] ?>"></textarea>
+                                        <textarea name="alamat" class="form-control" id="alamat"><?php echo $key['alamat'] ?></textarea>
+                                        <span class="help-block" style="color: red"><?php echo form_error('alamat') ?></span>
                                     </div>
 
                                     <button type="reset" class="btn btn-danger btn-sm">Reset</button>
                                     <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-paper-plane"> Simpan</i></button>
-
                         </div>
                     <?php } ?>
                     </div>
