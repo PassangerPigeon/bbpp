@@ -67,7 +67,9 @@ $this->load->view('dist/_partials/header');
       </div>
     </div>
   </section>
-  <div class="modal fade" id="modalHapus">
+
+</div>
+<div class="modal fade" id="modalHapus">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -88,5 +90,4 @@ $this->load->view('dist/_partials/header');
       </div>
     </div>
   </div> 
-</div>
 <?php $this->load->view('dist/_partials/footer'); ?>

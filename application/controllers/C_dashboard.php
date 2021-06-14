@@ -20,7 +20,7 @@ class C_dashboard extends CI_Controller {
             "tampilJumlahPerah" => $this->m_hasilperah->perahSapiTotal(),
             "tampilUser" => $this->m_user->totalUser()
         );
-		$this->load->view('view_bbpp/v_dashboard', $data);
+		$this->load->view('view_bbpp/V_dashboard', $data);
     }
 
 }

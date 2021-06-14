@@ -63,8 +63,8 @@ $this->load->view('dist/_partials/header');
                                     <?php $no = 1;
                                     foreach ($tampil as $key) : ?>
                                         <?php
-                                        $vp = $key['jumlahLaktasi'] == 1 ? '80' : ($key['jumlahLaktasi'] > 1) ? '60' : '0';
-                                        $nilaiBunting = $key['statPositif'] == 'Negatif' ? '0' : ($key['statPositif'] == 'Belum dikonfirmasi' ? '1' : ($key['statPositif'] == 'Positif' ? '2' : '-'));
+                                        $vp = ($key['jumlahLaktasi'] == 1) ? '80' : (($key['jumlahLaktasi'] > 1) ? '60' : '0');
+                                        $nilaiBunting = ($key['statPositif'] == 'Negatif') ? '0' : (($key['statPositif'] == 'Belum dikonfirmasi') ? '1' : (($key['statPositif'] == 'Positif' ? '2' : '-')));
                                         $partus = new DateTime($key['tglBeranakTerakhir']);
                                         $firstIB = new DateTime($key['firstIB']);
                                         $lastIB = new DateTime($key['lastIB']);

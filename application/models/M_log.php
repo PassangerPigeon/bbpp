@@ -3,10 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_log extends CI_Model {
 
-	public function __construct() {
-        parent::__construct();
-    }
-
     public function tampilLogModel()
     {
         $this->db->select("tb_user.*,tb_log.*");
